@@ -1,2 +1,3 @@
-# fft
-Fast Fourier Transform written in Go
+# FFT
+
+ - Fast Fourier Transform written in Go
