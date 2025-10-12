@@ -7,10 +7,10 @@ import (
 	"github.com/itsubaki/fft"
 )
 
-func ExampleCooleyTukey() {
+func ExampleCompute() {
 	x := []complex128{1, 2, 3, 4, 5, 6, 7, 8}
 
-	X := fft.CooleyTukey(x)
+	X := fft.Compute(x)
 	for _, v := range X {
 		fmt.Printf("%.4f\n", v)
 	}
@@ -26,10 +26,10 @@ func ExampleCooleyTukey() {
 	// (-4.0000-9.6569i)
 }
 
-func ExampleCooleyTukey_step() {
+func ExampleCompute_step() {
 	x := []complex128{1, 1, 1, 1, 0, 0, 0, 0}
 
-	X := fft.CooleyTukey(x)
+	X := fft.Compute(x)
 	for _, v := range X {
 		fmt.Printf("%.4f\n", v)
 	}
@@ -45,14 +45,14 @@ func ExampleCooleyTukey_step() {
 	// (1.0000+2.4142i)
 }
 
-func ExampleCooleyTukey_sin() {
+func ExampleCompute_sin() {
 	N := 8
 	x := make([]complex128, N)
 	for i := range N {
 		x[i] = complex(math.Sin(2*math.Pi*float64(i)/float64(N)), 0)
 	}
 
-	X := fft.CooleyTukey(x)
+	X := fft.Compute(x)
 	for _, v := range X {
 		fmt.Printf("%.4f\n", v)
 	}
@@ -68,7 +68,7 @@ func ExampleCooleyTukey_sin() {
 	// (-0.0000+4.0000i)
 }
 
-func ExampleCooleyTukey_sincos() {
+func ExampleCompute_sincos() {
 	N := 8
 	x := make([]complex128, N)
 	for i := range N {
@@ -77,7 +77,7 @@ func ExampleCooleyTukey_sincos() {
 		x[i] = complex(c+s, 0)
 	}
 
-	X := fft.CooleyTukey(x)
+	X := fft.Compute(x)
 	for _, v := range X {
 		fmt.Printf("%.4f\n", v)
 	}
@@ -93,10 +93,10 @@ func ExampleCooleyTukey_sincos() {
 	// (4.0000+0.0000i)
 }
 
-func ExampleCooleyTukey_impluse() {
+func ExampleCompute_impluse() {
 	x := []complex128{1, 0, 0, 0, 0, 0, 0, 0}
 
-	X := fft.CooleyTukey(x)
+	X := fft.Compute(x)
 	for _, v := range X {
 		fmt.Printf("%.4f\n", v)
 	}
@@ -112,10 +112,10 @@ func ExampleCooleyTukey_impluse() {
 	// (1.0000+0.0000i)
 }
 
-func ExampleCooleyTukey_const() {
+func ExampleCompute_const() {
 	x := []complex128{5, 5, 5, 5, 5, 5, 5, 5}
 
-	X := fft.CooleyTukey(x)
+	X := fft.Compute(x)
 	for _, v := range X {
 		fmt.Printf("%.4f\n", v)
 	}
@@ -131,11 +131,10 @@ func ExampleCooleyTukey_const() {
 	// (0.0000+0.0000i)
 }
 
-func ExampleCooleyTukey_inverse() {
+func ExampleCompute_inverse() {
 	x := []complex128{1, 2, 3, 4, 5, 6, 7, 8}
 
-	X := fft.CooleyTukey(x)
-	xi := fft.CooleyTukey(X, true)
+	xi := fft.Inverse(fft.Compute(x))
 	for _, v := range xi {
 		fmt.Printf("%.4f\n", v)
 	}
