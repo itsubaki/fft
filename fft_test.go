@@ -49,7 +49,8 @@ func ExampleCompute_sin() {
 	N := 8
 	x := make([]complex128, N)
 	for i := range N {
-		x[i] = complex(math.Sin(2*math.Pi*float64(i)/float64(N)), 0)
+		a := 2 * math.Pi * float64(i) / float64(N)
+		x[i] = complex(math.Sin(a), 0)
 	}
 
 	X := fft.Compute(x)
@@ -72,9 +73,11 @@ func ExampleCompute_sincos() {
 	N := 8
 	x := make([]complex128, N)
 	for i := range N {
-		c := math.Cos(2 * math.Pi * float64(i) / float64(N))
-		s := 0.5 * math.Sin(4*math.Pi*float64(i)/float64(N))
-		x[i] = complex(c+s, 0)
+		a := math.Pi * float64(i) / float64(N)
+		cos := math.Cos(2 * a)
+		sin := math.Sin(4 * a)
+
+		x[i] = complex(cos+0.5*sin, 0)
 	}
 
 	X := fft.Compute(x)
@@ -148,4 +151,12 @@ func ExampleCompute_inverse() {
 	// (6.0000-0.0000i)
 	// (7.0000-0.0000i)
 	// (8.0000-0.0000i)
+}
+
+func ExampleCompute_zero() {
+	X := fft.Compute([]complex128{})
+	fmt.Println(X)
+
+	// Output:
+	// []
 }
