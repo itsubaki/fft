@@ -7,10 +7,10 @@ import (
 	"github.com/itsubaki/fft"
 )
 
-func ExampleCompute() {
+func ExampleForward() {
 	x := []complex128{1, 2, 3, 4, 5, 6, 7, 8}
 
-	X := fft.Compute(x)
+	X := fft.Forward(x)
 	for _, v := range X {
 		fmt.Printf("%.4f\n", v)
 	}
@@ -26,10 +26,10 @@ func ExampleCompute() {
 	// (-4.0000-9.6569i)
 }
 
-func ExampleCompute_step() {
+func ExampleForward_step() {
 	x := []complex128{1, 1, 1, 1, 0, 0, 0, 0}
 
-	X := fft.Compute(x)
+	X := fft.Forward(x)
 	for _, v := range X {
 		fmt.Printf("%.4f\n", v)
 	}
@@ -45,7 +45,7 @@ func ExampleCompute_step() {
 	// (1.0000+2.4142i)
 }
 
-func ExampleCompute_sin() {
+func ExampleForward_sin() {
 	N := 8
 	x := make([]complex128, N)
 	for i := range N {
@@ -53,7 +53,7 @@ func ExampleCompute_sin() {
 		x[i] = complex(math.Sin(a), 0)
 	}
 
-	X := fft.Compute(x)
+	X := fft.Forward(x)
 	for _, v := range X {
 		fmt.Printf("%.4f\n", v)
 	}
@@ -69,7 +69,7 @@ func ExampleCompute_sin() {
 	// (-0.0000+4.0000i)
 }
 
-func ExampleCompute_sincos() {
+func ExampleForward_sincos() {
 	N := 8
 	x := make([]complex128, N)
 	for i := range N {
@@ -80,7 +80,7 @@ func ExampleCompute_sincos() {
 		x[i] = complex(cos+0.5*sin, 0)
 	}
 
-	X := fft.Compute(x)
+	X := fft.Forward(x)
 	for _, v := range X {
 		fmt.Printf("%.4f\n", v)
 	}
@@ -96,10 +96,10 @@ func ExampleCompute_sincos() {
 	// (4.0000+0.0000i)
 }
 
-func ExampleCompute_impluse() {
+func ExampleForward_impluse() {
 	x := []complex128{1, 0, 0, 0, 0, 0, 0, 0}
 
-	X := fft.Compute(x)
+	X := fft.Forward(x)
 	for _, v := range X {
 		fmt.Printf("%.4f\n", v)
 	}
@@ -115,10 +115,10 @@ func ExampleCompute_impluse() {
 	// (1.0000+0.0000i)
 }
 
-func ExampleCompute_const() {
+func ExampleForward_const() {
 	x := []complex128{5, 5, 5, 5, 5, 5, 5, 5}
 
-	X := fft.Compute(x)
+	X := fft.Forward(x)
 	for _, v := range X {
 		fmt.Printf("%.4f\n", v)
 	}
@@ -134,10 +134,10 @@ func ExampleCompute_const() {
 	// (0.0000+0.0000i)
 }
 
-func ExampleCompute_inverse() {
+func ExampleForward_inverse() {
 	x := []complex128{1, 2, 3, 4, 5, 6, 7, 8}
 
-	xi := fft.Inverse(fft.Compute(x))
+	xi := fft.Inverse(fft.Forward(x))
 	for _, v := range xi {
 		fmt.Printf("%.4f\n", v)
 	}
@@ -153,8 +153,8 @@ func ExampleCompute_inverse() {
 	// (8.0000-0.0000i)
 }
 
-func ExampleCompute_zero() {
-	X := fft.Compute([]complex128{})
+func ExampleForward_zero() {
+	X := fft.Forward([]complex128{})
 	fmt.Println(X)
 
 	// Output:

@@ -7,13 +7,13 @@ import (
 
 // Inverse returns the inverse discrete Fourier transform of the input sequence X
 func Inverse(X []complex128) []complex128 {
-	return Compute(X, true)
+	return Forward(X, true)
 }
 
-// Compute returns the discrete Fourier transform of the input sequence x
+// Forward returns the discrete Fourier transform of the input sequence x
 // using the Cooley-Tukey FFT algorithm.
 // len(x) must be a power of 2.
-func Compute(x []complex128, inverse ...bool) []complex128 {
+func Forward(x []complex128, inverse ...bool) []complex128 {
 	N := len(x)
 	if N == 0 {
 		return nil
