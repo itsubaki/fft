@@ -1,16 +1,16 @@
-package fft_test
+package transform_test
 
 import (
 	"fmt"
 	"math"
 
-	"github.com/itsubaki/fft"
+	"github.com/itsubaki/transform"
 )
 
-func ExampleForward() {
+func ExampleFFT() {
 	x := []complex128{1, 2, 3, 4, 5, 6, 7, 8}
 
-	X := fft.Forward(x)
+	X := transform.FFT(x)
 	for _, v := range X {
 		fmt.Printf("%.4f\n", v)
 	}
@@ -26,10 +26,10 @@ func ExampleForward() {
 	// (-4.0000-9.6569i)
 }
 
-func ExampleForward_step() {
+func ExampleFFT_step() {
 	x := []complex128{1, 1, 1, 1, 0, 0, 0, 0}
 
-	X := fft.Forward(x)
+	X := transform.FFT(x)
 	for _, v := range X {
 		fmt.Printf("%.4f\n", v)
 	}
@@ -45,7 +45,7 @@ func ExampleForward_step() {
 	// (1.0000+2.4142i)
 }
 
-func ExampleForward_sin() {
+func ExampleFFT_sin() {
 	N := 8
 	x := make([]complex128, N)
 	for i := range N {
@@ -53,7 +53,7 @@ func ExampleForward_sin() {
 		x[i] = complex(math.Sin(a), 0)
 	}
 
-	X := fft.Forward(x)
+	X := transform.FFT(x)
 	for _, v := range X {
 		fmt.Printf("%.4f\n", v)
 	}
@@ -69,7 +69,7 @@ func ExampleForward_sin() {
 	// (-0.0000+4.0000i)
 }
 
-func ExampleForward_sincos() {
+func ExampleFFT_sincos() {
 	N := 8
 	x := make([]complex128, N)
 	for i := range N {
@@ -80,7 +80,7 @@ func ExampleForward_sincos() {
 		x[i] = complex(cos+0.5*sin, 0)
 	}
 
-	X := fft.Forward(x)
+	X := transform.FFT(x)
 	for _, v := range X {
 		fmt.Printf("%.4f\n", v)
 	}
@@ -96,10 +96,10 @@ func ExampleForward_sincos() {
 	// (4.0000+0.0000i)
 }
 
-func ExampleForward_impluse() {
+func ExampleFFT_impluse() {
 	x := []complex128{1, 0, 0, 0, 0, 0, 0, 0}
 
-	X := fft.Forward(x)
+	X := transform.FFT(x)
 	for _, v := range X {
 		fmt.Printf("%.4f\n", v)
 	}
@@ -115,10 +115,10 @@ func ExampleForward_impluse() {
 	// (1.0000+0.0000i)
 }
 
-func ExampleForward_const() {
+func ExampleFFT_const() {
 	x := []complex128{5, 5, 5, 5, 5, 5, 5, 5}
 
-	X := fft.Forward(x)
+	X := transform.FFT(x)
 	for _, v := range X {
 		fmt.Printf("%.4f\n", v)
 	}
@@ -134,10 +134,11 @@ func ExampleForward_const() {
 	// (0.0000+0.0000i)
 }
 
-func ExampleForward_inverse() {
+func ExampleIFFT() {
 	x := []complex128{1, 2, 3, 4, 5, 6, 7, 8}
+	X := transform.FFT(x)
 
-	xi := fft.Inverse(fft.Forward(x))
+	xi := transform.IFFT(X)
 	for _, v := range xi {
 		fmt.Printf("%.4f\n", v)
 	}
@@ -153,8 +154,8 @@ func ExampleForward_inverse() {
 	// (8.0000-0.0000i)
 }
 
-func ExampleForward_zero() {
-	X := fft.Forward([]complex128{})
+func ExampleFFT_zero() {
+	X := transform.FFT([]complex128{})
 	fmt.Println(X)
 
 	// Output:

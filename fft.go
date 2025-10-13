@@ -1,19 +1,19 @@
-package fft
+package transform
 
 import (
 	"math"
 	"math/cmplx"
 )
 
-// Inverse returns the inverse discrete Fourier transform of the input sequence X
-func Inverse(X []complex128) []complex128 {
-	return Forward(X, true)
+// IFFT returns the inverse discrete Fourier transform of the input sequence X
+func IFFT(X []complex128) []complex128 {
+	return FFT(X, true)
 }
 
-// Forward returns the discrete Fourier transform of the input sequence x
+// FFT returns the discrete Fourier transform of the input sequence x
 // using the Cooley-Tukey FFT algorithm.
 // len(x) must be a power of 2.
-func Forward(x []complex128, inverse ...bool) []complex128 {
+func FFT(x []complex128, inverse ...bool) []complex128 {
 	N := len(x)
 	if N == 0 {
 		return nil
