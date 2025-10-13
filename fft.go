@@ -64,7 +64,7 @@ func FFT(x []complex128, inverse ...bool) []complex128 {
 }
 
 func reverse(i, n int) int {
-	bits := uint(log2(n))
+	bits := log2(n)
 
 	var result int
 	for b := range bits {
