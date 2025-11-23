@@ -1,16 +1,16 @@
-package transform_test
+package fft_test
 
 import (
 	"fmt"
 	"math"
 
-	"github.com/itsubaki/transform"
+	"github.com/itsubaki/fft"
 )
 
 func ExampleFFT() {
 	x := []complex128{1, 2, 3, 4, 5, 6, 7, 8}
 
-	X := transform.FFT(x)
+	X := fft.FFT(x)
 	for _, v := range X {
 		fmt.Printf("%.4f\n", v)
 	}
@@ -29,7 +29,7 @@ func ExampleFFT() {
 func ExampleFFT_step() {
 	x := []complex128{1, 1, 1, 1, 0, 0, 0, 0}
 
-	X := transform.FFT(x)
+	X := fft.FFT(x)
 	for _, v := range X {
 		fmt.Printf("%.4f\n", v)
 	}
@@ -53,7 +53,7 @@ func ExampleFFT_sin() {
 		x[i] = complex(math.Sin(a), 0)
 	}
 
-	X := transform.FFT(x)
+	X := fft.FFT(x)
 	for _, v := range X {
 		fmt.Printf("%.4f\n", v)
 	}
@@ -80,7 +80,7 @@ func ExampleFFT_sincos() {
 		x[i] = complex(cos+0.5*sin, 0)
 	}
 
-	X := transform.FFT(x)
+	X := fft.FFT(x)
 	for _, v := range X {
 		fmt.Printf("%.4f\n", v)
 	}
@@ -99,7 +99,7 @@ func ExampleFFT_sincos() {
 func ExampleFFT_impluse() {
 	x := []complex128{1, 0, 0, 0, 0, 0, 0, 0}
 
-	X := transform.FFT(x)
+	X := fft.FFT(x)
 	for _, v := range X {
 		fmt.Printf("%.4f\n", v)
 	}
@@ -118,7 +118,7 @@ func ExampleFFT_impluse() {
 func ExampleFFT_const() {
 	x := []complex128{5, 5, 5, 5, 5, 5, 5, 5}
 
-	X := transform.FFT(x)
+	X := fft.FFT(x)
 	for _, v := range X {
 		fmt.Printf("%.4f\n", v)
 	}
@@ -136,9 +136,9 @@ func ExampleFFT_const() {
 
 func ExampleIFFT() {
 	x := []complex128{1, 2, 3, 4, 5, 6, 7, 8}
-	X := transform.FFT(x)
+	X := fft.FFT(x)
 
-	xi := transform.IFFT(X)
+	xi := fft.IFFT(X)
 	for _, v := range xi {
 		fmt.Printf("%.4f\n", v)
 	}
@@ -155,7 +155,7 @@ func ExampleIFFT() {
 }
 
 func ExampleFFT_zero() {
-	X := transform.FFT([]complex128{})
+	X := fft.FFT([]complex128{})
 	fmt.Println(X)
 
 	// Output:

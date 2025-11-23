@@ -1,3 +1,3 @@
-module github.com/itsubaki/transform
+module github.com/itsubaki/fft
 
 go 1.24.5
