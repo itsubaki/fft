@@ -1,3 +1,3 @@
 # FFT
 
- - Fast Fourier transform in Go
+Fast Fourier transform in Go.
